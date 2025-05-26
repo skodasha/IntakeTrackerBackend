@@ -13,7 +13,7 @@ class UserService {
     if (existingUserTO) {
       throw ApiError.BadRequest(`User with email ${email} already exist`);
     }
-    
+
     const userId = generateUUID();
     const now = Date.now();
 
