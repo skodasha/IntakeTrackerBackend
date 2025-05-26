@@ -15,12 +15,12 @@ class AuthService {
         userRegistrationDataVO.password,
         parseInt(config.hashSalt, 10),
       );
-      
+
       const userVO = await this.userService.createUserWithCredentials({
         email: userRegistrationDataVO.email,
         password: hashedPassword,
       });
-      
+
       const sessionVO = await this.sessionService.createUserSession({
         userId: userVO.id,
       });
@@ -42,7 +42,6 @@ class AuthService {
         email: userLoginDataVO.email,
       });
 
-
       const isPasswordValid = await bcrypt.compare(
         userLoginDataVO.password,
         userVO.password,
@@ -59,7 +58,7 @@ class AuthService {
       return {
         accessToken: sessionVO.accessToken,
       };
-    } catch (error) {
+    } catch (err) {
       if (err) {
         throw err;
       }
